@@ -1,18 +1,20 @@
  	
 	//global variables
  	var currentWord = ["zebra", "dog"];
-    var wrongLetters = [];
+    var wrongLetters= [];
     var numGuesses = 9;
     var winCounter;
     var lossCounter;
-    var userInput;
     //the variable animal randomly selects a word from the array currentWord.
     var animal = currentWord[Math.floor(Math.random() * currentWord.length)];
     var seperateLetters= animal.split("");
     
     
     
-   
+   //this function substitutes dashes for letters in randomly selected animal.
+        for(var i=0; i<animal.length ; i++){
+            animal =animal.replace(animal[i], "-");
+        }
     
     
     
@@ -22,19 +24,32 @@
     //the User's gussed letter is stored in the variable userInput.
     document.onkeyup = function guess() {
 
-     userInput= String.fromCharCode(event.keyCode).toLowerCase();      
+        var userInput= String.fromCharCode(event.keyCode).toLowerCase();      
 
-     console.log(userInput)  
-   
+         console.log(userInput) 
+
+            for(var x=0; x<seperateLetters.length;x++){
+                 if(userInput===seperateLetters[x]){
+                   alert("match");
+
+                }  
+
+            }     
+
+
+             if(userInput!==seperateLetters.indexOf(userInput)){                
+                    wrongLetters.push(userInput);
+                   interface();
+
+                }   
+
+           
     }
 
  
-    //this function substitutes dashes for letters in randomly selected animal.
-        for(var i=0; i<animal.length ; i++){
-            animal =animal.replace(animal[i], "-");
-        }
     
-        //for loop ensure that the dashes take up length of animal name
+    
+       
     	
     
 
@@ -52,6 +67,8 @@
                     "<h2> Losses: " + lossCounter + "</h2>";
 
         document.getElementById("game").innerHTML=html;
+
+
                     
     }
 
